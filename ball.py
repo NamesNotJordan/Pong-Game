@@ -1,13 +1,27 @@
-class Ball:
+from turtle import Turtle
+SPEED = 10
+class Ball(Turtle):
     def __init__(self) -> None:
-        pass
+        super().__init__()
+        self.shape("circle")
+        self.color("white")
+        self.penup()
+        self.goto(0,0)
+        self.x_move = SPEED
+        self.y_move = SPEED
 
-    def reset(self):
-        pass
+
+    def center_court(self):
+        self.goto(0, 0)
+        self.bounce_x()
 
 
-    def move():
-        pass
+    def move(self):
+        self.goto(self.xcor()+self.x_move, self.ycor()+self.y_move)
 
-    def deflect(self):
-        pass
+    def bounce_y(self):
+        self.y_move *= -1
+    
+
+    def bounce_x(self):
+        self.x_move *= -1

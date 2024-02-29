@@ -4,6 +4,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import ScoreBoard
 import time
 # Setting Up Screen
 screen = Screen()
@@ -18,6 +19,11 @@ left_paddle = Paddle(-350, 0)
 
 # Ball
 ball = Ball()
+
+#Scoreboard 
+scoreboard = ScoreBoard()
+scoreboard.write_score()
+
 #Controls
 screen.listen()
 screen.onkey(right_paddle.go_up,"i")
@@ -39,10 +45,14 @@ while game_is_on:
     # Paddle collsion
     if (ball.distance(right_paddle) < 50 or ball.distance(left_paddle) < 50) and abs(ball.xcor()) > 340:
         ball.bounce_x()
+        ball.speed_up()
     
     # Goal
-    if abs(ball.xcor()) > 350:
+    if ball.xcor() > 350:
         ball.center_court()
-        ball.bounce_x()
+        scoreboard.l_point()
+    if ball.xcor()< -350:
+        ball.center_court()
+        scoreboard.r_point()
 
 screen.exitonclick()
